@@ -20,6 +20,9 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.example.trashthrashersapp.ui.theme.TrashThrashersAppTheme
 
+/**
+ * Main, do not alter.
+ */
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

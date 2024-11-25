@@ -7,6 +7,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 
+/**
+ * This is where the profile info goes, just contains text at the moment
+ */
 @Composable
 fun ProfileScreen(
     modifier: Modifier = Modifier,

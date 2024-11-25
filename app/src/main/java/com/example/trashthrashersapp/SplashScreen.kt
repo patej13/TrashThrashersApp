@@ -19,6 +19,12 @@ import androidx.compose.ui.res.painterResource
 import androidx.navigation.NavHostController
 import kotlinx.coroutines.delay
 
+/**
+ * Splash Screen function
+ * Contains an animation to show the logo
+ * There is currently a temporary logo in place
+ * Change the logo when an official one is made
+ */
 @Composable
 fun SplashScreen(navController: NavHostController) {
 
