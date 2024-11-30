@@ -25,5 +25,15 @@ fun HomeScreen(navController: NavHostController) {
         }) {
             Text(fontSize = 16.sp, text ="Go to App")
         }
+        Button(onClick = {
+            navController.navigate(NavigationItems.Login.route)
+        }) {
+            Text(fontSize = 16.sp, text ="Log in")
+        }
+        Button(onClick = {
+            navController.navigate(NavigationItems.Signup.route)
+        }) {
+            Text(fontSize = 16.sp, text ="Sign Up")
+        }
     }
 }
