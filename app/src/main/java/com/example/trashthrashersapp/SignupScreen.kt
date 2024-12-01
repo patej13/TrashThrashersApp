@@ -16,7 +16,7 @@ import androidx.navigation.NavHostController
 fun SignupScreen(
     navController: NavHostController,
     modifier: Modifier = Modifier,
-    signupViewModel: SignUpViewModel = viewModel()
+    signupViewModel: SignupViewModel = viewModel()
 ) {
     val email = signupViewModel.email
     val password = signupViewModel.password
@@ -37,7 +37,7 @@ fun SignupScreen(
         )
         Button(
             onClick = {
-                signupViewModel.signUpUser { isSuccess ->
+                signupViewModel.signUp { isSuccess ->
                     if (isSuccess) {
                         navController.navigate(NavigationItems.Login.route)
                     }

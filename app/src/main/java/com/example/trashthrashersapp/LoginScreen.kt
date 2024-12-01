@@ -36,10 +36,18 @@ fun LoginScreen(
             modifier = Modifier.fillMaxWidth()
         )
         Button(
-            onClick = { navController.navigate(NavigationItems.ProfileScreen.route) },
+            onClick = {
+                loginViewModel.loginUser { isSuccess ->
+                    if (isSuccess) {
+                        navController.navigate(NavigationItems.ProfileScreen.route)
+                    } else {
+                        navController.navigate(NavigationItems.Home.route)
+                    }
+                }
+            },
             modifier = Modifier.fillMaxWidth(),
         ) {
-            Text("Login")
+            Text("Log In")
         }
     }
 }

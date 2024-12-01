@@ -6,7 +6,7 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import com.google.firebase.auth.FirebaseAuth
 
-class SignUpViewModel : ViewModel(){
+class SignupViewModel: ViewModel()  {
     private val firebaseAuth: FirebaseAuth = FirebaseAuth.getInstance()
     var email by mutableStateOf("")
     var password by mutableStateOf("")
@@ -17,7 +17,7 @@ class SignUpViewModel : ViewModel(){
     fun onPasswordChange(newPassword: String) {
         password = newPassword
     }
-    fun signUpUser(onResult: (Boolean) -> Unit) {
+    fun signUp(onResult: (Boolean) -> Unit) {
         if (email.isNotEmpty() && password.isNotEmpty()) {
             try {
                 firebaseAuth.createUserWithEmailAndPassword(email, password)
