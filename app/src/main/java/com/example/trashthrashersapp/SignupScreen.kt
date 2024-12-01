@@ -36,10 +36,16 @@ fun SignupScreen(
             modifier = Modifier.fillMaxWidth()
         )
         Button(
-            onClick = { navController.navigate(NavigationItems.ProfileScreen.route) },
+            onClick = {
+                signupViewModel.signUpUser { isSuccess ->
+                    if (isSuccess) {
+                        navController.navigate(NavigationItems.Login.route)
+                    }
+                }
+            },
             modifier = Modifier.fillMaxWidth(),
         ) {
-            Text("Login")
+            Text("Sign Up")
         }
     }
 }
