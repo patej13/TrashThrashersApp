@@ -36,4 +36,8 @@ class LoginViewModel : ViewModel(){
             onResult(false)
         }
     }
+    fun resetEmailPassword(){
+        email = ""
+        password = ""
+    }
 }

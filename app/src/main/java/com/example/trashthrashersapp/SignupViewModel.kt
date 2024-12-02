@@ -27,4 +27,8 @@ class SignupViewModel: ViewModel()  {
             }
         }
     }
+    fun resetEmailPassword(){
+        email = ""
+        password = ""
+    }
 }

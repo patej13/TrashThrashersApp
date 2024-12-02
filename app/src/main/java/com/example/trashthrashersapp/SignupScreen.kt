@@ -7,6 +7,10 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -20,6 +24,7 @@ fun SignupScreen(
 ) {
     val email = signupViewModel.email
     val password = signupViewModel.password
+    var invalidMessage by remember { mutableStateOf("") }
     Column(
         modifier = modifier.padding(10.dp)
     ) {
@@ -37,9 +42,13 @@ fun SignupScreen(
         )
         Button(
             onClick = {
-                signupViewModel.signUp { isSuccess ->
-                    if (isSuccess) {
+                signupViewModel.signUp { success ->
+                    if (success) {
                         navController.navigate(NavigationItems.Login.route)
+                    }
+                    else{
+                        signupViewModel.resetEmailPassword()
+                        invalidMessage = "Enter a valid email or password"
                     }
                 }
             },
@@ -47,6 +56,9 @@ fun SignupScreen(
         ) {
             Text("Sign Up")
         }
+        Text(
+            text = invalidMessage
+        )
     }
 }
 @Composable
