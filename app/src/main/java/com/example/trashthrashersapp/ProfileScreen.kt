@@ -1,5 +1,6 @@
 package com.example.trashthrashersapp
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -17,10 +18,8 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 
-/**
- * This is where the profile info goes, just contains text at the moment
- */
 @Composable
 fun ProfileScreen(
     navController: NavHostController,
@@ -37,10 +36,10 @@ fun ProfileScreen(
         }
     }
     Column(
-        modifier = modifier.padding(10.dp)
+        modifier = modifier.padding(10.dp), horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.Center
     ) {
         Text(
-            "Temporary Profile Screen"
+            "Profile"
         )
         if (user != null) {
             Text("Hello $userName")
@@ -55,6 +54,17 @@ fun ProfileScreen(
             modifier = Modifier.fillMaxWidth(),
         ) {
             Text("Log Out")
+        }
+        Button(
+            onClick = {
+                if (user != null) {
+                    user.delete()
+                }
+                navController.navigate(NavigationItems.Home.route)
+            },
+            modifier = Modifier.fillMaxWidth(),
+        ) {
+            Text("Delete Account")
         }
     }
 }
