@@ -52,6 +52,14 @@ android {
 }
 
 dependencies {
+    //camera dependecies
+    implementation("androidx.camera:camera-camera2:1.1.0")
+    implementation("androidx.camera:camera-lifecycle:1.1.0")
+    implementation("androidx.camera:camera-view:1.1.0")
+    implementation("androidx.compose.ui:ui:1.5.0")
+    implementation("androidx.compose.material:material:1.5.0")
+    implementation("androidx.compose.ui:ui-tooling-preview:1.5.0")
+    //
     implementation(platform("com.google.firebase:firebase-bom:33.6.0"))
     implementation("com.google.firebase:firebase-analytics")
     implementation("com.firebaseui:firebase-ui-auth:7.2.0")
