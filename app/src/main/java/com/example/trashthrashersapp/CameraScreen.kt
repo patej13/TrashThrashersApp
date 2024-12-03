@@ -21,7 +21,8 @@ fun ProfileScreen(
         modifier = modifier.padding(10.dp)
     ) {
         Text(
-            "Temporary Profile Screen"
+            "Temporary Camera Screen"
         )
     }
 }
+
