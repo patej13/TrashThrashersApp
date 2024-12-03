@@ -15,6 +15,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.navigation.NavHostController
+import com.google.firebase.auth.FirebaseAuth
 
 @Composable
 fun LoginScreen(
@@ -25,6 +26,21 @@ fun LoginScreen(
     val email = loginViewModel.email
     val password = loginViewModel.password
     var invalidMessage by remember { mutableStateOf("") }
+
+    val firebaseAuth: FirebaseAuth = FirebaseAuth.getInstance()
+    fun loginUser() {
+        if (email.isNotEmpty() && password.isNotEmpty()) {
+            firebaseAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    navController.navigate(NavigationItems.ProfileScreen.route)
+                }
+                else{
+                    loginViewModel.resetEmailPassword()
+                    invalidMessage = "Enter a valid email or password"
+                }
+            }
+        }
+    }
     Column(
         modifier = modifier.padding(10.dp)
     ) {
@@ -42,15 +58,7 @@ fun LoginScreen(
         )
         Button(
             onClick = {
-                loginViewModel.loginUser { success ->
-                    if (success) {
-                        navController.navigate(NavigationItems.ProfileScreen.route)
-                    } else {
-                        //navController.navigate(NavigationItems.Login.route)
-                        loginViewModel.resetEmailPassword()
-                        invalidMessage = "Improper Credentials"
-                    }
-                }
+                loginUser()
             },
             modifier = Modifier.fillMaxWidth(),
         ) {

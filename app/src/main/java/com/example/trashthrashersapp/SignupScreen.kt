@@ -15,6 +15,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.auth.FirebaseAuth
 
 @Composable
 fun SignupScreen(
@@ -24,10 +26,45 @@ fun SignupScreen(
 ) {
     val email = signupViewModel.email
     val password = signupViewModel.password
+    val userName = signupViewModel.userName
     var invalidMessage by remember { mutableStateOf("") }
+
+    val firebaseAuth: FirebaseAuth = FirebaseAuth.getInstance()
+    val firestoreDB = FirebaseFirestore.getInstance()
+
+    fun signUp() {
+        if (email.isNotEmpty() && password.isNotEmpty() && userName.isNotEmpty()) {
+            firebaseAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    val user = firebaseAuth.currentUser
+                    user?.let {
+                        val userInfo = firestoreDB.collection("Info").document(it.uid)
+                        val userData = hashMapOf(
+                            "email" to email,
+                            "password" to password,
+                            "username" to userName,
+                            "uid" to it.uid
+                        )
+                        userInfo.set(userData)
+                        navController.navigate(NavigationItems.Login.route)
+                    }
+                }
+                else{
+                    signupViewModel.resetEmailPassword()
+                    invalidMessage = "Enter a valid email or password"
+                }
+            }
+        }
+    }
     Column(
         modifier = modifier.padding(10.dp)
     ) {
+        UsernameField(
+            labelText = "Username",
+            textInput = userName,
+            onValueChange = {signupViewModel.onUsernameChange(it)},
+            modifier = Modifier.fillMaxWidth()
+        )
         SignUpEmailField(
             labelText = "Email",
             textInput = email,
@@ -42,15 +79,7 @@ fun SignupScreen(
         )
         Button(
             onClick = {
-                signupViewModel.signUp { success ->
-                    if (success) {
-                        navController.navigate(NavigationItems.Login.route)
-                    }
-                    else{
-                        signupViewModel.resetEmailPassword()
-                        invalidMessage = "Enter a valid email or password"
-                    }
-                }
+                signUp()
             },
             modifier = Modifier.fillMaxWidth(),
         ) {
@@ -80,6 +109,23 @@ fun SignUpEmailField(
 }
 @Composable
 fun SignUpPasswordField(
+    labelText: String,
+    textInput: String,
+    onValueChange: (String) -> Unit,
+    modifier: Modifier = Modifier,
+) {
+    Column(modifier = modifier) {
+        TextField(
+            value = textInput,
+            onValueChange = onValueChange,
+            label = { Text(labelText) },
+            singleLine = true,
+            modifier = Modifier.fillMaxWidth()
+        )
+    }
+}
+@Composable
+fun UsernameField(
     labelText: String,
     textInput: String,
     onValueChange: (String) -> Unit,
