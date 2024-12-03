@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "400447086972",
+    "project_id": "trashthrashersapp",
+    "storage_bucket": "trashthrashersapp.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:400447086972:android:7e94e276fd4919f2b744f9",
+        "android_client_info": {
+          "package_name": "com.example.trashthrashersapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB1uVPgRecTC5o5aNL2YA7_uS-_7m-vSBU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

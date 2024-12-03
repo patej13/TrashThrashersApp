@@ -24,7 +24,8 @@ fun BottomBar(
     modifier: Modifier = Modifier
 ) {
     val screens = listOf(
-        NavigationItems.ProfileScreen
+        NavigationItems.ProfileScreen,
+        NavigationItems.MapScreen
     )
     NavigationBar(
         modifier = modifier,

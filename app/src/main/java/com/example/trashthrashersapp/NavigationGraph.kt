@@ -34,5 +34,9 @@ fun NavigationGraph(navController: NavHostController, onBottomBarVisibilityChang
             onBottomBarVisibilityChanged(false)
             SignupScreen(navController = navController)
         }
+        composable(NavigationItems.MapScreen.route) {
+            onBottomBarVisibilityChanged(true)
+            MapScreen()
+        }
     }
 }

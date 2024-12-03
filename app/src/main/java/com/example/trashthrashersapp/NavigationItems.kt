@@ -23,4 +23,9 @@ sealed class NavigationItems(
         title = "Profile",
         icon = Icons.Outlined.AccountCircle
     )
+    object MapScreen : NavigationItems(
+        route = "map",
+        title = "Map",
+        icon = Icons.Outlined.AccountCircle
+    )
 }
