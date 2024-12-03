@@ -1,5 +1,6 @@
 package com.example.trashthrashersapp
 
+import android.graphics.Camera
 import android.widget.Button
 import android.widget.ImageView
 import androidx.compose.foundation.layout.Column
@@ -14,7 +15,7 @@ import androidx.compose.ui.unit.dp
  */
 
 @Composable
-fun ProfileScreen(
+fun CameraScreen(
     modifier: Modifier = Modifier,
 ) {
     Column(
