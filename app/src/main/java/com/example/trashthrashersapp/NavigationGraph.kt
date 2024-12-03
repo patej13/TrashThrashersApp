@@ -26,6 +26,10 @@ fun NavigationGraph(navController: NavHostController, onBottomBarVisibilityChang
             onBottomBarVisibilityChanged(true)
             ProfileScreen()
         }
+        composable(NavigationItems.CameraScreen.route) {
+            onBottomBarVisibilityChanged(true)
+            CameraScreen()
+        }
         composable(NavigationItems.Login.route) {
             onBottomBarVisibilityChanged(false)
             LoginScreen(navController = navController)
