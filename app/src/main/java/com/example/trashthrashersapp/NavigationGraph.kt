@@ -26,6 +26,10 @@ fun NavigationGraph(navController: NavHostController, onBottomBarVisibilityChang
             onBottomBarVisibilityChanged(true)
             ProfileScreen(navController = navController)
         }
+        composable(NavigationItems.AboutScreen.route) {
+            onBottomBarVisibilityChanged(true)
+            AboutScreen(navController = navController)
+        }
         composable(NavigationItems.Login.route) {
             onBottomBarVisibilityChanged(false)
             LoginScreen(navController = navController)

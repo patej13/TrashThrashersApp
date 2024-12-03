@@ -1,6 +1,7 @@
 package com.example.trashthrashersapp
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.AccountCircle
+import androidx.compose.material.icons.outlined.Info
 import androidx.compose.ui.graphics.vector.ImageVector
 
 /**
@@ -22,5 +23,10 @@ sealed class NavigationItems(
         route = "profile",
         title = "Profile",
         icon = Icons.Outlined.AccountCircle
+    )
+    object AboutScreen : NavigationItems(
+        route = "about",
+        title = "About",
+        icon = Icons.Outlined.Info
     )
 }
