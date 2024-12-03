@@ -29,16 +29,21 @@ fun SignupScreen(
     val email = signupViewModel.email
     val password = signupViewModel.password
     val userName = signupViewModel.userName
+    val passwordConfirm = signupViewModel.passwordConfirm
+    val trashMarked = "0"
+    val trashCollected = "0"
     var invalidMessage by remember { mutableStateOf("") }
+    var errorMessage by remember { mutableStateOf("") }
     var properValidation by remember { mutableStateOf("") }
     var properEmailValidation by remember { mutableStateOf("") }
     var properPasswordValidation by remember { mutableStateOf("") }
+    var properPasswordConfirm by remember { mutableStateOf("") }
 
     val firebaseAuth: FirebaseAuth = FirebaseAuth.getInstance()
     val firestoreDB = FirebaseFirestore.getInstance()
 
     fun signUp() {
-        if (email.isNotEmpty() && password.isNotEmpty() && userName.isNotEmpty()) {
+        if (email.isNotEmpty() && password.isNotEmpty() && userName.isNotEmpty() && password == passwordConfirm) {
             firebaseAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener { task ->
                 if (task.isSuccessful) {
                     val user = firebaseAuth.currentUser
@@ -48,6 +53,8 @@ fun SignupScreen(
                             "email" to email,
                             "password" to password,
                             "username" to userName,
+                            "trashMarked" to trashMarked,
+                            "trashCollected" to trashCollected,
                             "uid" to it.uid
                         )
                         userInfo.set(userData)
@@ -56,20 +63,16 @@ fun SignupScreen(
                 }
                 else{
                     signupViewModel.resetEmailPassword()
-                    if(email.isEmpty()){
-                        invalidMessage = "Email Field Cannot be Empty"
-                    }
-                    if(password.isEmpty()){
-                        invalidMessage = "Password Field Cannot be Empty"
-                    }
-                    if(userName.isEmpty()){
-                        invalidMessage = "Username Field Cannot be Empty"
+                    if(email.isEmpty() || password.isEmpty() || userName.isEmpty() || passwordConfirm.isEmpty()){
+                        invalidMessage = "Fields Cannot be Empty"
                     }
                     else{
+                        errorMessage = "Error in Signup Process:"
                         invalidMessage = "Enter a valid email or password"
                         properValidation = "Emails and passwords must follow the following format:"
                         properEmailValidation = "4 letters + @ + valid domain (ex .com)"
-                        properPasswordValidation = "Must be at least 4 characters or digits"
+                        properPasswordValidation = "Password must be at least 5 characters"
+                        properPasswordConfirm = "Make sure password and confirm password match"
                     }
                 }
             }
@@ -96,14 +99,32 @@ fun SignupScreen(
             onValueChange = {signupViewModel.onPasswordChange(it)},
             modifier = Modifier.fillMaxWidth()
         )
+        SignUpPasswordConfirmField(
+            labelText = "Password Confirmation",
+            textInput = passwordConfirm,
+            onValueChange = {signupViewModel.onPasswordConfirmChange(it)},
+            modifier = Modifier.fillMaxWidth()
+        )
         Button(
             onClick = {
                 signUp()
             },
-            modifier = Modifier.fillMaxWidth(),
+            modifier = Modifier.fillMaxWidth()
         ) {
             Text("Sign Up")
         }
+        Text(
+            text = "Emails and passwords must follow the following format:"
+        )
+        Text(
+            text = "4 letters + @ + valid domain (ex .com)"
+        )
+        Text(
+            text = "Password must be at least 5 characters"
+        )
+        Text(
+            text = errorMessage
+        )
         Text(
             text = invalidMessage
         )
@@ -128,6 +149,24 @@ fun SignUpEmailField(
 }
 @Composable
 fun SignUpPasswordField(
+    labelText: String,
+    textInput: String,
+    onValueChange: (String) -> Unit,
+    modifier: Modifier = Modifier,
+) {
+    Column(modifier = modifier) {
+        TextField(
+            value = textInput,
+            onValueChange = onValueChange,
+            label = { Text(labelText) },
+            singleLine = true,
+            visualTransformation = PasswordVisualTransformation(),
+            modifier = Modifier.fillMaxWidth()
+        )
+    }
+}
+@Composable
+fun SignUpPasswordConfirmField(
     labelText: String,
     textInput: String,
     onValueChange: (String) -> Unit,

@@ -27,16 +27,20 @@ fun ProfileScreen(
 ) {
     val user = Firebase.auth.currentUser
     var userName by remember { mutableStateOf("") }
+    var trashCollected by remember { mutableStateOf("") }
+    var trashMarked by remember { mutableStateOf("") }
 
     LaunchedEffect(user?.uid) {
         val firestoreDB = FirebaseFirestore.getInstance()
         val userInformation = user?.let { firestoreDB.collection("Info").document(it.uid) }
         userInformation?.get()?.addOnSuccessListener { document ->
             userName = document.getString("username").toString()
+            trashCollected = document.getString("trashCollected").toString()
+            trashMarked = document.getString("trashMarked").toString()
         }
     }
     Column(
-        modifier = modifier.padding(10.dp), horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.Center
+        modifier = modifier.padding(10.dp), horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.Bottom
     ) {
         Text(
             "Profile"
@@ -46,12 +50,18 @@ fun ProfileScreen(
         } else {
             Text("")
         }
+        Text(
+            "Trash Marked: $trashMarked"
+        )
+        Text(
+            "Trash Collected: $trashCollected"
+        )
         Button(
             onClick = {
                 Firebase.auth.signOut()
                 navController.navigate(NavigationItems.Home.route)
             },
-            modifier = Modifier.fillMaxWidth(),
+            modifier = Modifier.fillMaxWidth()
         ) {
             Text("Log Out")
         }
@@ -62,7 +72,7 @@ fun ProfileScreen(
                 }
                 navController.navigate(NavigationItems.Home.route)
             },
-            modifier = Modifier.fillMaxWidth(),
+            modifier = Modifier.fillMaxWidth()
         ) {
             Text("Delete Account")
         }
