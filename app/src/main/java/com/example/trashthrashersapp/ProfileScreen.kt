@@ -49,6 +49,7 @@ fun ProfileScreen(
         }
         Button(
             onClick = {
+                Firebase.auth.signOut()
                 navController.navigate(NavigationItems.Home.route)
             },
             modifier = Modifier.fillMaxWidth(),
