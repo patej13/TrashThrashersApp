@@ -36,7 +36,15 @@ fun LoginScreen(
                 }
                 else{
                     loginViewModel.resetEmailPassword()
-                    invalidMessage = "Enter a valid email or password"
+                    if(email.isEmpty()){
+                        invalidMessage = "Email Field Cannot be Empty"
+                    }
+                    if(password.isEmpty()){
+                        invalidMessage = "Password Field Cannot be Empty"
+                    }
+                    else{
+                        invalidMessage = "Email or Password is incorrect"
+                    }
                 }
             }
         }

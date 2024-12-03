@@ -28,6 +28,9 @@ fun SignupScreen(
     val password = signupViewModel.password
     val userName = signupViewModel.userName
     var invalidMessage by remember { mutableStateOf("") }
+    var properValidation by remember { mutableStateOf("") }
+    var properEmailValidation by remember { mutableStateOf("") }
+    var properPasswordValidation by remember { mutableStateOf("") }
 
     val firebaseAuth: FirebaseAuth = FirebaseAuth.getInstance()
     val firestoreDB = FirebaseFirestore.getInstance()
@@ -51,7 +54,21 @@ fun SignupScreen(
                 }
                 else{
                     signupViewModel.resetEmailPassword()
-                    invalidMessage = "Enter a valid email or password"
+                    if(email.isEmpty()){
+                        invalidMessage = "Email Field Cannot be Empty"
+                    }
+                    if(password.isEmpty()){
+                        invalidMessage = "Password Field Cannot be Empty"
+                    }
+                    if(userName.isEmpty()){
+                        invalidMessage = "Username Field Cannot be Empty"
+                    }
+                    else{
+                        invalidMessage = "Enter a valid email or password"
+                        properValidation = "Emails and passwords must follow the following format:"
+                        properEmailValidation = "4 letters + @ + valid domain (ex .com)"
+                        properPasswordValidation = "Must be at least 4 characters or digits"
+                    }
                 }
             }
         }
