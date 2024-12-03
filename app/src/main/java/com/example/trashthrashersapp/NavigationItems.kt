@@ -15,6 +15,8 @@ sealed class NavigationItems(
 ) {
     object Welcome : NavigationItems("welcomeScreen")
     object Home: NavigationItems("homeScreen")
+    object Login: NavigationItems("loginScreen")
+    object Signup: NavigationItems("signupScreen")
 
     object ProfileScreen : NavigationItems(
         route = "profile",

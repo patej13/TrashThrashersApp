@@ -1,6 +1,8 @@
 plugins {
+    //id("com.android.application") Causes issues, says its already requested so its commented out
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
+    id("com.google.gms.google-services")
 }
 
 android {
@@ -9,7 +11,7 @@ android {
 
     defaultConfig {
         applicationId = "com.example.trashthrashersapp"
-        minSdk = 21
+        minSdk = 23
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
@@ -50,7 +52,10 @@ android {
 }
 
 dependencies {
-
+    implementation(platform("com.google.firebase:firebase-bom:33.6.0"))
+    implementation("com.google.firebase:firebase-analytics")
+    implementation("com.firebaseui:firebase-ui-auth:7.2.0")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.8.4")
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
