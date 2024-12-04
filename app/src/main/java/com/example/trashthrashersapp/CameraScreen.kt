@@ -1,5 +1,6 @@
 package com.example.trashthrashersapp
 
+
 import android.graphics.Camera
 import android.widget.Button
 import android.widget.ImageView
@@ -9,11 +10,21 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.google.android.gms.auth.api.phone.SmsCodeAutofillClient.PermissionState
+
 
 /**
  * This is where camera code will go
  */
 
+@Composable
+fun CameraScreen(){
+
+
+
+}
+
+/*
 @Composable
 fun CameraScreen(
     modifier: Modifier = Modifier,
@@ -26,4 +37,8 @@ fun CameraScreen(
         )
     }
 }
+
+ */
+
+
 
