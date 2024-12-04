@@ -4,9 +4,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
@@ -90,7 +88,7 @@ fun SignupScreen(
             }
         }
     }
-    TwoColorBackgroundColumn()
+    TwoColorSignUpBackground()
 
     Box(
         modifier = modifier
@@ -140,7 +138,11 @@ fun SignupScreen(
                     contentColor = Color.White),
                 modifier = Modifier.fillMaxWidth()
             ) {
-                Text("Sign Up")
+                Text(
+                    text = "Sign Up",
+                    fontSize = 20.sp
+
+                )
             }
             Text(
                 text = "Emails and passwords must follow the following format:"
@@ -166,7 +168,7 @@ fun SignupScreen(
                 },
                 fontSize = 20.sp
             )
-            SocialMediaRow()
+            /*SocialMediaRow()*/
         }
     }
 }

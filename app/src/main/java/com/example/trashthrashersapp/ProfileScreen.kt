@@ -5,7 +5,6 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -38,53 +37,9 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.ui.zIndex
 import com.example.trashthrashersapp.ui.theme.CustomOrange
 import com.example.trashthrashersapp.ui.theme.CustomRed
-import com.example.trashthrashersapp.ui.theme.CustomTeal
 import com.example.trashthrashersapp.ui.theme.NeutralBackground
 
 
-@Composable
-fun TwoColorBackgroundColumn() {
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(
-                brush = Brush.verticalGradient(
-                    colors = listOf(
-                        Color(0xFFEDFFF5), // Light Mint (top section)
-                        Color(0xFF8CF0D0), // Mint Green (middle section)
-                        Color(0xFFFFB347)  // Orange (bottom section)
-                    )
-                )
-            )
-    ) {
-        // Content for the first section (top)
-        Box(
-            modifier = Modifier
-                .fillMaxWidth()
-                .weight(1f)
-        ) {
-            Text(
-                text = "Top Section",
-                color = Color.Black,
-                modifier = Modifier.align(Alignment.Center)
-            )
-        }
-
-        // Content for the second section (bottom)
-        Box(
-            modifier = Modifier
-                .fillMaxWidth()
-                .weight(1f)
-        ) {
-
-            Text(
-                text = "Bottom Section",
-                color = Color.White,
-                modifier = Modifier.align(Alignment.Center)
-            )
-        }
-    }
-}
 
 @Composable
 fun ProfileScreen(
@@ -106,8 +61,8 @@ fun ProfileScreen(
         }
     }
 
-    TwoColorBackgroundColumn()
-
+    TwoColorProfileBackground()
+/*TealBackground {*/
     Column(
         modifier = modifier.padding(10.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -196,3 +151,4 @@ fun ProfileScreen(
         }
     }
 }
+
