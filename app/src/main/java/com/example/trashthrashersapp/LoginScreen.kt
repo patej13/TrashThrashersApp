@@ -26,9 +26,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
+import com.example.trashthrashersapp.ui.theme.CustomOrange
 import com.example.trashthrashersapp.ui.theme.CustomTeal
 import com.google.firebase.auth.FirebaseAuth
 
@@ -64,62 +67,94 @@ fun LoginScreen(
             }
         }
     }
-    Column(
+    Box(
         modifier = modifier
-            .padding(10.dp)
-            .fillMaxSize(),
-        horizontalAlignment = Alignment.CenterHorizontally
+            .padding(16.dp)
+            .background(
+                Color.White,
+                shape = RoundedCornerShape(10.dp)
+            ) // Adding background and rounded corners
+            .border(
+                2.dp,
+                Color.Gray,
+                RoundedCornerShape(10.dp)
+            ) // Adding border with rounded corners
+            .padding(5.dp) // Padding inside the box
     ) {
-        Box(
+        Column(
             modifier = modifier
-                .height(80.dp)
-                .padding(top = 20.dp))
-                { Image(painter = painterResource(id = R.drawable.appname), contentDescription ="Splash Screen logo", modifier = Modifier, contentScale = ContentScale.Crop)
-                }
-
-        Text(
-            text = "We've missed you, welcome back! ",
-            fontSize = 20.sp,
-            color = Color.Black,
-            modifier = Modifier.padding(top = 10.dp, bottom = 10.dp)
-
-        )
-        Text(
-            text = "Login Here ",
-            fontSize = 26.sp,
-            color = CustomTeal,
-            modifier = Modifier.padding(bottom = 24.dp)
-        )
-        EmailField(
-            labelText = "Email",
-            textInput = email,
-            onValueChange = {loginViewModel.onEmailChange(it)},
-            modifier = Modifier.fillMaxWidth()
-        )
-        PasswordField(
-            labelText = "Password",
-            textInput = password,
-            onValueChange = {loginViewModel.onPasswordChange(it)},
-            modifier = Modifier.fillMaxWidth()
-        )
-        Button(
-            onClick = {
-                loginUser()
-            },
-            modifier = Modifier.fillMaxWidth(),
+                .padding(10.dp)
+                .fillMaxSize(),
+            horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Text("Log In")
-        }
-        Text(
-            text = invalidMessage
-        )
-/*        Text(
-            text = "Don't have an account?" ,"Sign up!",
-            fontSize = 20.sp,
-            color = Color.Black,
-            modifier = Modifier.padding(top = 10.dp, bottom = 10.dp)
+            Box(
+                modifier = modifier
+                    .height(80.dp)
+                    .padding(top = 20.dp)
+            )
+            {
+                Image(
+                    painter = painterResource(id = R.drawable.appname),
+                    contentDescription = "Splash Screen logo",
+                    modifier = Modifier,
+                    contentScale = ContentScale.Crop
+                )
+            }
 
-        )*/
+            Text(
+                text = "We've missed you, welcome back! ",
+                fontSize = 20.sp,
+                color = Color.Black,
+                modifier = Modifier.padding(top = 10.dp, bottom = 10.dp)
+
+            )
+            Text(
+                text = "Login Here ",
+                fontSize = 26.sp,
+                color = CustomTeal,
+                modifier = Modifier.padding(bottom = 24.dp)
+            )
+            EmailField(
+                labelText = "Email",
+                textInput = email,
+                onValueChange = { loginViewModel.onEmailChange(it) },
+                modifier = Modifier.fillMaxWidth()
+            )
+            PasswordField(
+                labelText = "Password",
+                textInput = password,
+                onValueChange = { loginViewModel.onPasswordChange(it) },
+                modifier = Modifier.fillMaxWidth()
+            )
+            Button(
+                onClick = {
+                    loginUser()
+                },
+                modifier = Modifier.fillMaxWidth(),
+            ) {
+                Text("Log In")
+            }
+            Text(
+                text = invalidMessage
+            )
+
+            Text(
+                text = "Forgot your password? ",
+                fontSize = 14.sp,
+                color = CustomOrange,
+                modifier = Modifier.padding(top = 10.dp, bottom = 10.dp)
+            )
+
+            Text(
+                text = buildAnnotatedString {
+                    append("Don't have an account? ")
+                    withStyle(style = androidx.compose.ui.text.SpanStyle(color = Color.Blue)) {
+                        append("Sign up!")
+                    }
+                },
+                fontSize = 16.sp
+           )
+            }
     }
 }
 @Composable
