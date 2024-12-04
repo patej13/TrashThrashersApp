@@ -5,6 +5,7 @@ import android.graphics.ImageDecoder
 import android.net.Uri
 import android.os.Build
 import android.provider.MediaStore
+import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -34,6 +35,8 @@ import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.auth
 import com.google.firebase.firestore.FirebaseFirestore
+import java.io.InputStream
+
 //
 
 
@@ -58,6 +61,31 @@ fun CameraScreen(){
             val source = ImageDecoder.createSource(context.contentResolver, it)
             bitmap.value = ImageDecoder.decodeBitmap(source)
         }
+    }
+
+    fun uploadImage(uri: Uri?){
+        uri?.let {
+            val inputStream: InputStream? = context.contentResolver.openInputStream(it)
+            val byteArray = inputStream?.readBytes() ?: return
+
+
+            val fileName = "images/${System.currentTimeMillis()}.jpg"
+            val fileRef = storageReference.child(fileName)
+
+
+            val uploadTask = fileRef.putBytes(byteArray)
+
+
+            uploadTask.addOnSuccessListener {
+                // Get the download URL after successful upload
+                fileRef.downloadUrl.addOnSuccessListener { downloadUri ->
+                    uploadedImageUrl = downloadUri.toString() // Save URL to state
+                }
+            }.addOnFailureListener { exception ->
+                Toast.makeText(context, "Upload failed: ${exception.message}", Toast.LENGTH_SHORT).show()
+            }
+        }
+
     }
 
     Column (
