@@ -4,10 +4,13 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
@@ -17,11 +20,15 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
+import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
+import com.example.trashthrashersapp.ui.theme.CustomOrange
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.auth.FirebaseAuth
 
@@ -87,14 +94,18 @@ fun SignupScreen(
 
     Box(
         modifier = modifier
-            .padding(16.dp)
-            .background(Color.White, shape = RoundedCornerShape(10.dp)) // Adding background and rounded corners
-            .border(2.dp, Color.Gray, RoundedCornerShape(10.dp)) // Adding border with rounded corners
-            .padding(5.dp) // Padding inside the box
+            .padding(top = 100.dp, start = 16.dp, end = 16.dp)
+            .background(Color.White, shape = RoundedCornerShape(10.dp))
+            .border(2.dp, Color.Gray, RoundedCornerShape(10.dp))
+            .padding(5.dp)
+
     ) {
+
         Column(
             modifier = modifier.padding(10.dp)
         ) {
+
+
 
             UsernameField(
                 labelText = "Username",
@@ -124,6 +135,9 @@ fun SignupScreen(
                 onClick = {
                     signUp()
                 },
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = CustomOrange,
+                    contentColor = Color.White),
                 modifier = Modifier.fillMaxWidth()
             ) {
                 Text("Sign Up")
@@ -143,6 +157,16 @@ fun SignupScreen(
             Text(
                 text = invalidMessage
             )
+            Text(
+                text = buildAnnotatedString {
+                    append("Already have an account? ")
+                    withStyle(style = androidx.compose.ui.text.SpanStyle(color = Color.Blue)) {
+                        append("Login!")
+                    }
+                },
+                fontSize = 20.sp
+            )
+            SocialMediaRow()
         }
     }
 }

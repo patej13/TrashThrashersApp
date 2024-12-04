@@ -14,6 +14,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -29,12 +30,16 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.zIndex
+import com.example.trashthrashersapp.ui.theme.CustomOrange
+import com.example.trashthrashersapp.ui.theme.CustomRed
 import com.example.trashthrashersapp.ui.theme.CustomTeal
+import com.example.trashthrashersapp.ui.theme.NeutralBackground
 
 
 @Composable
@@ -42,25 +47,44 @@ fun TwoColorBackgroundColumn() {
     Column(
         modifier = Modifier
             .fillMaxSize()
+            .background(
+                brush = Brush.verticalGradient(
+                    colors = listOf(
+                        Color(0xFFEDFFF5), // Light Mint (top section)
+                        Color(0xFF8CF0D0), // Mint Green (middle section)
+                        Color(0xFFFFB347)  // Orange (bottom section)
+                    )
+                )
+            )
     ) {
-        // Top half with a color
+        // Content for the first section (top)
         Box(
             modifier = Modifier
                 .fillMaxWidth()
-                .weight(.5f) // Takes up half of the screen's height
-                .background(CustomTeal) // First color (top part)
-        )
+                .weight(1f)
+        ) {
+            Text(
+                text = "Top Section",
+                color = Color.Black,
+                modifier = Modifier.align(Alignment.Center)
+            )
+        }
 
-        // Bottom half with a different color
+        // Content for the second section (bottom)
         Box(
             modifier = Modifier
                 .fillMaxWidth()
-                .weight(1f) // Takes up the other half of the screen's height
-                .background(Color.White) // Second color (bottom part)
-        )
+                .weight(1f)
+        ) {
+
+            Text(
+                text = "Bottom Section",
+                color = Color.White,
+                modifier = Modifier.align(Alignment.Center)
+            )
+        }
     }
 }
-
 
 @Composable
 fun ProfileScreen(
@@ -92,6 +116,7 @@ fun ProfileScreen(
         Text(
             text = "Profile",
             fontSize = 20.sp,
+            modifier = Modifier.padding(bottom = 36.dp)
         )
 
         Box(
@@ -115,7 +140,7 @@ fun ProfileScreen(
                     .padding(top = 40.dp)
                     .fillMaxWidth()
                     .background(
-                        color = Color.LightGray,
+                        color = NeutralBackground,
                         shape = androidx.compose.foundation.shape.RoundedCornerShape(16.dp)
                     )
                     .padding(vertical = 16.dp, horizontal = 16.dp)
@@ -145,9 +170,13 @@ fun ProfileScreen(
                         Firebase.auth.signOut()
                         navController.navigate(NavigationItems.Home.route)
                     },
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = CustomOrange,
+                        contentColor = Color.White),
                     modifier = Modifier.fillMaxWidth()
                 ) {
-                    Text("Log Out")
+                   Text(fontSize = 20.sp, text ="Log Out")
+
                 }
                 Button(
                     onClick = {
@@ -156,9 +185,12 @@ fun ProfileScreen(
                         }
                         navController.navigate(NavigationItems.Home.route)
                     },
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = CustomRed,
+                        contentColor = Color.White),
                     modifier = Modifier.fillMaxWidth()
                 ) {
-                    Text("Delete Account")
+                    Text(fontSize = 20.sp, text ="Delete Account")
                 }
             }
         }
