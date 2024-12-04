@@ -15,6 +15,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.navigation.NavHostController
 import kotlinx.coroutines.delay
@@ -33,7 +34,7 @@ fun SplashScreen(navController: NavHostController) {
     }
     LaunchedEffect(key1 = true) {
         scale.animateTo(
-            targetValue = 0.5f,
+            targetValue = 1f,
             animationSpec = tween(durationMillis = 1000,0, easing = {
                 OvershootInterpolator(2f).getInterpolation(it)
             }
@@ -42,7 +43,7 @@ fun SplashScreen(navController: NavHostController) {
         navController.navigate(NavigationItems.Home.route)
     }
 
-    Column (modifier = Modifier.fillMaxSize().wrapContentSize(Alignment.Center)){
-        Image(painter = painterResource(id = R.drawable.templogo), contentDescription ="" )
+    Box (modifier = Modifier.fillMaxSize().wrapContentSize(Alignment.Center)){
+        Image(painter = painterResource(id = R.drawable.logo1), contentDescription ="Splash Screen logo" , modifier = Modifier.fillMaxSize(), contentScale = ContentScale.Crop)
     }
 }
