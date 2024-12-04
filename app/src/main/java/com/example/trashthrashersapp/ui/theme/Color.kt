@@ -2,7 +2,10 @@ package com.example.trashthrashersapp.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
-val CustomTeal = Color(0xFF92F1D2)
+val CustomTeal = Color(0xFF00BCD4)
+val NeutralBackground = Color(0xFFF0F0F0) // Light background
+val ButtonTextColor = Color.White // White text for buttons
+
 
 val Purple80 = Color(0xFFD0BCFF)
 val PurpleGrey80 = Color(0xFFCCC2DC)

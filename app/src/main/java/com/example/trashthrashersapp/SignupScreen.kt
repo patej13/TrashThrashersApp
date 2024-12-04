@@ -1,8 +1,12 @@
 package com.example.trashthrashersapp
 
+import androidx.compose.foundation.background
+import androidx.compose.foundation.border
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
@@ -12,6 +16,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
@@ -78,56 +83,65 @@ fun SignupScreen(
             }
         }
     }
-    Column(
-        modifier = modifier.padding(10.dp)
+    Box(
+        modifier = modifier
+            .padding(16.dp)
+            .background(Color.White, shape = RoundedCornerShape(10.dp)) // Adding background and rounded corners
+            .border(2.dp, Color.Gray, RoundedCornerShape(10.dp)) // Adding border with rounded corners
+            .padding(5.dp) // Padding inside the box
     ) {
-        UsernameField(
-            labelText = "Username",
-            textInput = userName,
-            onValueChange = {signupViewModel.onUsernameChange(it)},
-            modifier = Modifier.fillMaxWidth()
-        )
-        SignUpEmailField(
-            labelText = "Email",
-            textInput = email,
-            onValueChange = {signupViewModel.onEmailChange(it)},
-            modifier = Modifier.fillMaxWidth()
-        )
-        SignUpPasswordField(
-            labelText = "Password",
-            textInput = password,
-            onValueChange = {signupViewModel.onPasswordChange(it)},
-            modifier = Modifier.fillMaxWidth()
-        )
-        SignUpPasswordConfirmField(
-            labelText = "Password Confirmation",
-            textInput = passwordConfirm,
-            onValueChange = {signupViewModel.onPasswordConfirmChange(it)},
-            modifier = Modifier.fillMaxWidth()
-        )
-        Button(
-            onClick = {
-                signUp()
-            },
-            modifier = Modifier.fillMaxWidth()
+        Column(
+            modifier = modifier.padding(10.dp)
         ) {
-            Text("Sign Up")
+
+            UsernameField(
+                labelText = "Username",
+                textInput = userName,
+                onValueChange = { signupViewModel.onUsernameChange(it) },
+                modifier = Modifier.fillMaxWidth()
+            )
+            SignUpEmailField(
+                labelText = "Email",
+                textInput = email,
+                onValueChange = { signupViewModel.onEmailChange(it) },
+                modifier = Modifier.fillMaxWidth()
+            )
+            SignUpPasswordField(
+                labelText = "Password",
+                textInput = password,
+                onValueChange = { signupViewModel.onPasswordChange(it) },
+                modifier = Modifier.fillMaxWidth()
+            )
+            SignUpPasswordConfirmField(
+                labelText = "Password Confirmation",
+                textInput = passwordConfirm,
+                onValueChange = { signupViewModel.onPasswordConfirmChange(it) },
+                modifier = Modifier.fillMaxWidth()
+            )
+            Button(
+                onClick = {
+                    signUp()
+                },
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                Text("Sign Up")
+            }
+            Text(
+                text = "Emails and passwords must follow the following format:"
+            )
+            Text(
+                text = "4 letters + @ + valid domain (ex .com)"
+            )
+            Text(
+                text = "Password must be at least 5 characters"
+            )
+            Text(
+                text = errorMessage
+            )
+            Text(
+                text = invalidMessage
+            )
         }
-        Text(
-            text = "Emails and passwords must follow the following format:"
-        )
-        Text(
-            text = "4 letters + @ + valid domain (ex .com)"
-        )
-        Text(
-            text = "Password must be at least 5 characters"
-        )
-        Text(
-            text = errorMessage
-        )
-        Text(
-            text = invalidMessage
-        )
     }
 }
 @Composable

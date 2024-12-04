@@ -1,5 +1,7 @@
 package com.example.trashthrashersapp
 
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -16,6 +18,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.example.trashthrashersapp.ui.theme.CustomTeal
+import com.example.trashthrashersapp.ui.theme.NeutralBackground
 
 /**
  * Temporary Home Screen
@@ -28,19 +31,32 @@ fun HomeScreen(
     navController: NavHostController,
     modifier: Modifier = Modifier
 ) {
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(NeutralBackground)
+    )
     Column (modifier = Modifier.fillMaxSize().wrapContentSize(Alignment.Center).padding(10.dp)){
+
+
         Button(onClick = {
             navController.navigate(NavigationItems.ProfileScreen.route)
         },
             modifier = Modifier.fillMaxWidth()) {
             Text(fontSize = 16.sp, text ="Go to App")
         }
+
+
+
         Button(onClick = {
             navController.navigate(NavigationItems.Login.route)
         },
             modifier = Modifier.fillMaxWidth()) {
             Text(fontSize = 16.sp, text ="Log in")
         }
+
+
+
         Button(onClick = {
             navController.navigate(NavigationItems.Signup.route)
         },
