@@ -27,6 +27,15 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.StorageReference
+// extra firebase imports just in case
+import com.google.firebase.Firebase
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.auth
+import com.google.firebase.firestore.FirebaseFirestore
+//
+
 
 
 @Composable
@@ -40,6 +49,7 @@ fun CameraScreen(){
         uri: Uri? -> imageUri = uri
     }
 
+    val storageReference: StorageReference = FirebaseStorage.getInstance().reference
 
     imageUri?.let {
         if (Build.VERSION.SDK_INT < 28) {
