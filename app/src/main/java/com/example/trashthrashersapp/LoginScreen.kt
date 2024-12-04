@@ -67,19 +67,21 @@ fun LoginScreen(
             }
         }
     }
+    TwoColorBackgroundColumn()
+
     Box(
         modifier = modifier
             .padding(16.dp)
             .background(
                 Color.White,
                 shape = RoundedCornerShape(10.dp)
-            ) // Adding background and rounded corners
+            )
             .border(
                 2.dp,
                 Color.Gray,
                 RoundedCornerShape(10.dp)
-            ) // Adding border with rounded corners
-            .padding(5.dp) // Padding inside the box
+            )
+            .padding(5.dp)
     ) {
         Column(
             modifier = modifier

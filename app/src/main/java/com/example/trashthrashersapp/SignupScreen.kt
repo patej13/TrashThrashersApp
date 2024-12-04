@@ -83,6 +83,8 @@ fun SignupScreen(
             }
         }
     }
+    TwoColorBackgroundColumn()
+
     Box(
         modifier = modifier
             .padding(16.dp)

@@ -1,10 +1,13 @@
 package com.example.trashthrashersapp
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -30,6 +33,34 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.zIndex
+import com.example.trashthrashersapp.ui.theme.CustomTeal
+
+
+@Composable
+fun TwoColorBackgroundColumn() {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+    ) {
+        // Top half with a color
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .weight(.5f) // Takes up half of the screen's height
+                .background(CustomTeal) // First color (top part)
+        )
+
+        // Bottom half with a different color
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .weight(1f) // Takes up the other half of the screen's height
+                .background(Color.White) // Second color (bottom part)
+        )
+    }
+}
+
 
 @Composable
 fun ProfileScreen(
@@ -51,54 +82,85 @@ fun ProfileScreen(
         }
     }
 
+    TwoColorBackgroundColumn()
 
     Column(
-        modifier = modifier.padding(10.dp), horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.Bottom
+        modifier = modifier.padding(10.dp),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Bottom
     ) {
         Text(
             text = "Profile",
             fontSize = 20.sp,
         )
-        Image(
-            painter = painterResource(id = R.drawable.placeholder_profile), // Replace with your local drawable
-            contentDescription = "Profile Picture",
-            modifier = Modifier
-                .size(120.dp)
-                .clip(CircleShape),
-            contentScale = ContentScale.Crop
-        )
 
-        Spacer(modifier = Modifier.height(16.dp))
-        if (user != null) {
-            Text("Hello $userName")
-        } else {
-            Text("")
-        }
-        Text(
-            "Trash Marked: $trashMarked"
-        )
-        Text(
-            "Trash Collected: $trashCollected"
-        )
-        Button(
-            onClick = {
-                Firebase.auth.signOut()
-                navController.navigate(NavigationItems.Home.route)
-            },
-            modifier = Modifier.fillMaxWidth()
+        Box(
+            modifier = Modifier.fillMaxWidth(),
+            contentAlignment = Alignment.TopCenter
         ) {
-            Text("Log Out")
-        }
-        Button(
-            onClick = {
+            Image(
+                painter = painterResource(id = R.drawable.placeholder_profile), // Replace with your drawable
+                contentDescription = "Profile Picture",
+                modifier = Modifier
+                    .size(120.dp)
+                    .clip(CircleShape)
+                    .align(Alignment.TopCenter)
+                    .zIndex(2f),
+                contentScale = ContentScale.Crop
+            )
+
+            // User Info Box
+            Column(
+                modifier = Modifier
+                    .padding(top = 40.dp)
+                    .fillMaxWidth()
+                    .background(
+                        color = Color.LightGray,
+                        shape = androidx.compose.foundation.shape.RoundedCornerShape(16.dp)
+                    )
+                    .padding(vertical = 16.dp, horizontal = 16.dp)
+            ) {
+                Spacer(modifier = Modifier.height(60.dp))
+                // Username
+                Text(
+                    text = userName,
+                    fontSize = 20.sp,
+                    modifier = Modifier.padding(bottom = 8.dp)
+                )
+
+                Spacer(modifier = Modifier.height(16.dp))
                 if (user != null) {
-                    user.delete()
+                    Text("Hello $userName")
+                } else {
+                    Text("")
                 }
-                navController.navigate(NavigationItems.Home.route)
-            },
-            modifier = Modifier.fillMaxWidth()
-        ) {
-            Text("Delete Account")
+                Text(
+                    "Trash Marked: $trashMarked"
+                )
+                Text(
+                    "Trash Collected: $trashCollected"
+                )
+                Button(
+                    onClick = {
+                        Firebase.auth.signOut()
+                        navController.navigate(NavigationItems.Home.route)
+                    },
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    Text("Log Out")
+                }
+                Button(
+                    onClick = {
+                        if (user != null) {
+                            user.delete()
+                        }
+                        navController.navigate(NavigationItems.Home.route)
+                    },
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    Text("Delete Account")
+                }
+            }
         }
     }
 }
