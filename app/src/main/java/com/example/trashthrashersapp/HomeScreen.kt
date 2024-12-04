@@ -1,7 +1,6 @@
 package com.example.trashthrashersapp
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Arrangement.Top
 import androidx.compose.foundation.layout.Box
@@ -24,11 +23,9 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
-import com.example.trashthrashersapp.ui.theme.CustomMint
 import com.example.trashthrashersapp.ui.theme.CustomOrange
 import com.example.trashthrashersapp.ui.theme.CustomRed
 import com.example.trashthrashersapp.ui.theme.CustomTeal
-import com.example.trashthrashersapp.ui.theme.NeutralBackground
 
 /**
  * Temporary Home Screen
@@ -47,7 +44,7 @@ WhiteBackground {
         modifier = Modifier
             .fillMaxSize()
             .padding(10.dp),
-        horizontalAlignment = Alignment.CenterHorizontally, // Centers the content horizontally
+        horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Top
     )
     {
@@ -73,11 +70,11 @@ WhiteBackground {
         Box(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(10.dp), // Add padding as needed
-            contentAlignment = Alignment.Center // Center horizontally
+                .padding(10.dp),
+            contentAlignment = Alignment.Center
         ) {
             Column(
-                horizontalAlignment = Alignment.CenterHorizontally // Center elements horizontally
+                horizontalAlignment = Alignment.CenterHorizontally
             ) {
 
                 Text(
@@ -106,7 +103,7 @@ WhiteBackground {
             ),
             shape = RoundedCornerShape(30.dp),
             modifier = Modifier
-                .size(width = 300.dp, height = 70.dp) // Custom width and height
+                .size(width = 300.dp, height = 70.dp)
 
         ) {
             Text(fontSize = 18.sp, text = "Go to App")
