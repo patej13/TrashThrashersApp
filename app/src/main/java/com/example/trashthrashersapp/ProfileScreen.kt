@@ -80,7 +80,7 @@ fun ProfileScreen(
             contentAlignment = Alignment.TopCenter
         ) {
             Image(
-                painter = painterResource(id = R.drawable.placeholder_profile), // Replace with your drawable
+                painter = painterResource(id = R.drawable.placeholder_profile),
                 contentDescription = "Profile Picture",
                 modifier = Modifier
                     .size(120.dp)
@@ -97,7 +97,7 @@ fun ProfileScreen(
                     .fillMaxWidth()
                     .background(
                         color = NeutralBackground,
-                        shape = androidx.compose.foundation.shape.RoundedCornerShape(16.dp)
+                        shape = RoundedCornerShape(16.dp)
                     )
                     .padding(vertical = 16.dp, horizontal = 16.dp)
             ) {

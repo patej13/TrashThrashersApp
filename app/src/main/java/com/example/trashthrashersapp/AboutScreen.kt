@@ -56,7 +56,7 @@ fun AboutScreen(
         }
     }
 
-    TealBackground {
+    TwoColorProfileBackground()
         Column(
             modifier = modifier.padding(10.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
@@ -68,7 +68,7 @@ fun AboutScreen(
                     .fillMaxWidth()
                     .background(
                         color = NeutralBackground,
-                        shape = androidx.compose.foundation.shape.RoundedCornerShape(16.dp)
+                        shape = RoundedCornerShape(16.dp)
                     )
                     .padding(vertical = 16.dp, horizontal = 16.dp)
             ) {
@@ -109,7 +109,8 @@ fun AboutScreen(
                     modifier = Modifier.height(60.dp)
                         .fillMaxWidth(),
                 ) {
-                    Text("Add Trash Marked")
+                    Text(text= "Add Trash Marked",
+                            fontSize = 20.sp)
                 }
                 Spacer(modifier=Modifier.height(15.dp))
 
@@ -138,9 +139,9 @@ fun AboutScreen(
                     shape = RoundedCornerShape(30.dp),
                     modifier = Modifier.height(60.dp)
                         .fillMaxWidth(),                ) {
-                    Text("Add Trash Collected")
+                    Text(text ="Add Trash Collected",
+                        fontSize = 20.sp)
                 }
             }
         }
     }
-}
