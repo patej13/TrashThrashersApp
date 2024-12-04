@@ -1,11 +1,16 @@
 package com.example.trashthrashersapp
 
+import androidx.compose.animation.expandHorizontally
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Arrangement.Top
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -14,6 +19,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
@@ -31,19 +37,44 @@ fun HomeScreen(
     navController: NavHostController,
     modifier: Modifier = Modifier
 ) {
-    Box(
+    TwoColorBackgroundColumn()
+
+
+
+    Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(NeutralBackground)
-    )
-    Column (modifier = Modifier.fillMaxSize().wrapContentSize(Alignment.Center).padding(10.dp)){
-
+            .padding(10.dp),
+        horizontalAlignment = Alignment.CenterHorizontally, // Centers the content horizontally
+        verticalArrangement = Arrangement.Top)
+        {
+        Box(
+            modifier = Modifier
+                .fillMaxWidth(),
+            contentAlignment = Alignment.Center
+        ) {
+            Image(
+                painter = painterResource(id = R.drawable.homeimage),
+                contentDescription = "Clean up",
+                modifier = Modifier.fillMaxWidth()
+                    .padding(top = 20.dp)
+            )
+        }
+        Text(text = "With your help we will be able to help clean our neighborhoods!",
+            fontSize = 36.sp,
+            letterSpacing = 1.sp,
+            lineHeight = 40.sp,
+            modifier = Modifier.padding(vertical = 60.dp))
 
         Button(onClick = {
             navController.navigate(NavigationItems.ProfileScreen.route)
         },
-            modifier = Modifier.fillMaxWidth()) {
-            Text(fontSize = 16.sp, text ="Go to App")
+            colors = ButtonDefaults.buttonColors(
+                containerColor = CustomTeal,
+                contentColor = Color.White),
+            modifier = Modifier.fillMaxWidth()
+                .padding(top = 40.dp)) {
+            Text(fontSize = 18.sp, text ="Go to App")
         }
 
 
@@ -51,8 +82,11 @@ fun HomeScreen(
         Button(onClick = {
             navController.navigate(NavigationItems.Login.route)
         },
+            colors = ButtonDefaults.buttonColors(
+                containerColor = CustomTeal,
+                contentColor = Color.White),
             modifier = Modifier.fillMaxWidth()) {
-            Text(fontSize = 16.sp, text ="Log in")
+            Text(fontSize = 18.sp, text ="Log in")
         }
 
 
@@ -65,7 +99,7 @@ fun HomeScreen(
                 contentColor = Color.White
             ),
             modifier = Modifier.fillMaxWidth()) {
-            Text(fontSize = 16.sp, text ="Sign Up")
+            Text(fontSize = 18.sp, text ="Sign Up")
         }
     }
 }

@@ -3,8 +3,12 @@ package com.example.trashthrashersapp
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Text
@@ -16,8 +20,11 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.wrapContentHeight
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -32,6 +39,7 @@ import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.example.trashthrashersapp.ui.theme.CustomOrange
+import com.example.trashthrashersapp.ui.theme.CustomRed
 import com.example.trashthrashersapp.ui.theme.CustomTeal
 import com.google.firebase.auth.FirebaseAuth
 
@@ -51,114 +59,192 @@ fun LoginScreen(
             firebaseAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener { task ->
                 if (task.isSuccessful) {
                     navController.navigate(NavigationItems.ProfileScreen.route)
-                }
-                else{
+                } else {
                     loginViewModel.resetEmailPassword()
-                    if(email.isEmpty()){
+                    if (email.isEmpty()) {
                         invalidMessage = "Email Field Cannot be Empty"
                     }
-                    if(password.isEmpty()){
+                    if (password.isEmpty()) {
                         invalidMessage = "Password Field Cannot be Empty"
-                    }
-                    else{
+                    } else {
                         invalidMessage = "Email or Password is incorrect"
                     }
                 }
             }
         }
     }
+
+
+
     TwoColorBackgroundColumn()
+    Column(
 
-    Box(
         modifier = modifier
-            .padding(16.dp)
-            .background(
-                Color.White,
-                shape = RoundedCornerShape(10.dp)
-            )
-            .border(
-                2.dp,
-                Color.Gray,
-                RoundedCornerShape(10.dp)
-            )
-            .padding(5.dp)
+            .padding(10.dp)
+            .fillMaxSize(),
+        horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Column(
+        Spacer(modifier = Modifier.height(80.dp))
+        Box(
             modifier = modifier
-                .padding(10.dp)
-                .fillMaxSize(),
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-            Box(
-                modifier = modifier
-                    .height(80.dp)
-                    .padding(top = 20.dp)
-            )
-            {
-                Image(
-                    painter = painterResource(id = R.drawable.appname),
-                    contentDescription = "Splash Screen logo",
-                    modifier = Modifier,
-                    contentScale = ContentScale.Crop
+                .padding(16.dp)
+                .background(
+                    Color.White,
+                    shape = RoundedCornerShape(10.dp)
                 )
-            }
-
-            Text(
-                text = "We've missed you, welcome back! ",
-                fontSize = 20.sp,
-                color = Color.Black,
-                modifier = Modifier.padding(top = 10.dp, bottom = 10.dp)
-
-            )
-            Text(
-                text = "Login Here ",
-                fontSize = 26.sp,
-                color = CustomTeal,
-                modifier = Modifier.padding(bottom = 24.dp)
-            )
-            EmailField(
-                labelText = "Email",
-                textInput = email,
-                onValueChange = { loginViewModel.onEmailChange(it) },
-                modifier = Modifier.fillMaxWidth()
-            )
-            PasswordField(
-                labelText = "Password",
-                textInput = password,
-                onValueChange = { loginViewModel.onPasswordChange(it) },
-                modifier = Modifier.fillMaxWidth()
-            )
-            Button(
-                onClick = {
-                    loginUser()
-                },
-                modifier = Modifier.fillMaxWidth(),
+                .border(
+                    2.dp,
+                    Color.Gray,
+                    RoundedCornerShape(10.dp)
+                )
+                .padding(5.dp)
+                .height(600.dp)
+        ) {
+            Column(
+                modifier = modifier
+                    .padding(10.dp)
+                    .fillMaxSize(),
+                horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                Text("Log In")
-            }
-            Text(
-                text = invalidMessage
-            )
+                Box(
+                    modifier = modifier
+                        .height(80.dp)
+                        .padding(top = 20.dp)
+                )
+                {
+                    Image(
+                        painter = painterResource(id = R.drawable.appname),
+                        contentDescription = "Splash Screen logo",
+                        modifier = Modifier,
+                        contentScale = ContentScale.Crop
+                    )
+                }
 
-            Text(
-                text = "Forgot your password? ",
-                fontSize = 14.sp,
-                color = CustomOrange,
-                modifier = Modifier.padding(top = 10.dp, bottom = 10.dp)
-            )
+                Text(
+                    text = "We've missed you, welcome back! ",
+                    fontSize = 20.sp,
+                    color = Color.Black,
+                    modifier = Modifier.padding(top = 10.dp, bottom = 10.dp)
 
-            Text(
-                text = buildAnnotatedString {
-                    append("Don't have an account? ")
-                    withStyle(style = androidx.compose.ui.text.SpanStyle(color = Color.Blue)) {
-                        append("Sign up!")
-                    }
-                },
-                fontSize = 16.sp
-           )
+                )
+                Text(
+                    text = "Login Here ",
+                    fontSize = 26.sp,
+                    color = CustomRed,
+                    modifier = Modifier.padding(bottom = 24.dp)
+                )
+                EmailField(
+                    labelText = "Email",
+                    textInput = email,
+                    onValueChange = { loginViewModel.onEmailChange(it) },
+                    modifier = Modifier.fillMaxWidth()
+                )
+                PasswordField(
+                    labelText = "Password",
+                    textInput = password,
+                    onValueChange = { loginViewModel.onPasswordChange(it) },
+                    modifier = Modifier.fillMaxWidth()
+                )
+                Button(
+                    onClick = {
+                        loginUser()
+                    },
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = CustomOrange,
+                        contentColor = Color.White
+                    ),
+                    modifier = Modifier.fillMaxWidth(),
+                ) {
+                    Text(
+                        text = "Log In",
+                        fontSize = 20.sp
+                    )
+                }
+                Text(
+                    text = invalidMessage
+                )
+
+                Text(
+                    text = "Forgot your password? ",
+                    fontSize = 16.sp,
+                    color = CustomRed,
+                    modifier = Modifier.padding(top = 10.dp, bottom = 10.dp)
+                        .clickable {  }
+                )
+
+
+
+
+                Text(
+                    text = buildAnnotatedString {
+                        append("Don't have an account? ")
+                        withStyle(style = androidx.compose.ui.text.SpanStyle(color = Color.Blue)) {
+                            append("Sign up!")
+                        }
+                    },
+                    fontSize = 16.sp,
+                )
+                SocialMediaRow()
             }
+        }
     }
 }
+
+@Composable
+fun SocialMediaRow() {
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(16.dp),
+        horizontalArrangement = Arrangement.spacedBy(16.dp),
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Box(
+            modifier = Modifier
+                .size(100.dp)
+                .background(Color(0xFFFFFFFF), shape = CircleShape)
+                .clickable {  },
+            contentAlignment = Alignment.Center
+        ) {
+
+            Image(
+                painter = painterResource(id = R.drawable.googleicon),
+                contentDescription = "Facebook",
+                modifier = Modifier.size(40.dp)
+            )
+        }
+        Box(
+            modifier = Modifier
+                .size(100.dp)
+                .background(Color(0xFFFFFFFF), shape = CircleShape)
+                .clickable {  },
+            contentAlignment = Alignment.Center
+        ) {
+
+            Image(
+                painter = painterResource(id = R.drawable.facebookicon),
+                contentDescription = "Facebook",
+                modifier = Modifier.size(40.dp)
+            )
+        }
+        Box(
+            modifier = Modifier
+                .size(100.dp)
+                .background(Color(0xFFFFFFFF), shape = CircleShape)
+                .clickable {  },
+            contentAlignment = Alignment.Center
+        ) {
+
+            Image(
+                painter = painterResource(id = R.drawable.twittericon),
+                contentDescription = "Facebook",
+                modifier = Modifier.size(40.dp)
+            )
+        }
+
+    }
+}
+
 @Composable
 fun EmailField(
     labelText: String,
