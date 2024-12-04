@@ -24,7 +24,6 @@ fun MapScreen() {
         position = CameraPosition.fromLatLngZoom(campusCenter, 16f)
     }
 
-    // List of markers dynamically added by the user
     val markers = remember { mutableStateListOf<LatLng>() }
     val scope = rememberCoroutineScope()
 
@@ -32,19 +31,16 @@ fun MapScreen() {
         modifier = Modifier.fillMaxSize(),
         cameraPositionState = cameraPositionState,
         onMapClick = { latLng ->
-            // Add a new marker to the list when the map is clicked
             markers.add(latLng)
         }
     ) {
-        // Render all markers on the map
         markers.forEach { location ->
             Marker(
                 state = rememberMarkerState(position = location),
                 title = "User-added Marker",
                 snippet = "Lat: ${location.latitude}, Lng: ${location.longitude}",
                 onClick = {
-                    // Optional: Add any additional behavior for marker clicks here
-                    true // Return true to consume the click event
+                    true 
                 }
             )
         }
