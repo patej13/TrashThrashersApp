@@ -22,6 +22,10 @@ fun NavigationGraph(navController: NavHostController, onBottomBarVisibilityChang
             onBottomBarVisibilityChanged(false)
             HomeScreen(navController = navController)
         }
+        composable(NavigationItems.CameraScreen.route) {
+            onBottomBarVisibilityChanged(true)
+            CameraScreen()
+        }
         composable(NavigationItems.ProfileScreen.route) {
             onBottomBarVisibilityChanged(true)
             ProfileScreen(navController = navController)
