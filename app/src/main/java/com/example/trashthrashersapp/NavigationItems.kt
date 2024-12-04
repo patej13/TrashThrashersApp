@@ -24,16 +24,17 @@ sealed class NavigationItems(
         title = "Profile",
         icon = Icons.Outlined.AccountCircle
     )
+    object MapScreen : NavigationItems(
+        route = "map",
+        title = "Map",
+        icon = Icons.Outlined.AccountCircle
+    )
+
+
+    object AboutScreen : NavigationItems(
+        route = "about",
+        title = "About",
+        icon = Icons.Outlined.Info
+    )
+
 }
-object MapScreen : NavigationItems(
-    route = "map",
-    title = "Map",
-    icon = Icons.Outlined.AccountCircle
-)
-
-
-object AboutScreen : NavigationItems(
-    route = "about",
-    title = "About",
-    icon = Icons.Outlined.Info
-)
