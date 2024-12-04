@@ -168,6 +168,7 @@ fun SignupScreen(
 
                 )
             }
+            Spacer(modifier = Modifier.height(20.dp))
             Text(
                 text = "Emails and passwords must follow the following format:"
             )
@@ -190,8 +191,10 @@ fun SignupScreen(
                         append("Login!")
                     }
                 },
+
                 fontSize = 20.sp
             )
+
             /*SocialMediaRow()*/
         }
     }
