@@ -4,12 +4,12 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
-import com.google.firebase.auth.FirebaseAuth
 
 class SignupViewModel: ViewModel()  {
-    private val firebaseAuth: FirebaseAuth = FirebaseAuth.getInstance()
     var email by mutableStateOf("")
     var password by mutableStateOf("")
+    var userName by mutableStateOf("")
+    var passwordConfirm by mutableStateOf("")
 
     fun onEmailChange(newEmail: String) {
         email = newEmail
@@ -17,14 +17,14 @@ class SignupViewModel: ViewModel()  {
     fun onPasswordChange(newPassword: String) {
         password = newPassword
     }
-    fun signUp(onResult: (Boolean) -> Unit) {
-        if (email.isNotEmpty() && password.isNotEmpty()) {
-            try {
-                firebaseAuth.createUserWithEmailAndPassword(email, password)
-                onResult(true)
-            } catch (e: Exception) {
-                onResult(false)
-            }
-        }
+    fun onPasswordConfirmChange(newpasswordConfirm: String) {
+        passwordConfirm = newpasswordConfirm
+    }
+    fun onUsernameChange(newUsername: String) {
+        userName = newUsername
+    }
+    fun resetEmailPassword(){
+        email = ""
+        password = ""
     }
 }

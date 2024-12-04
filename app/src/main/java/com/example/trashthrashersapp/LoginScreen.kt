@@ -10,7 +10,13 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.Button
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.navigation.NavHostController
+import com.google.firebase.auth.FirebaseAuth
 
 @Composable
 fun LoginScreen(
@@ -20,6 +26,30 @@ fun LoginScreen(
 ) {
     val email = loginViewModel.email
     val password = loginViewModel.password
+    var invalidMessage by remember { mutableStateOf("") }
+
+    val firebaseAuth: FirebaseAuth = FirebaseAuth.getInstance()
+    fun loginUser() {
+        if (email.isNotEmpty() && password.isNotEmpty()) {
+            firebaseAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    navController.navigate(NavigationItems.ProfileScreen.route)
+                }
+                else{
+                    loginViewModel.resetEmailPassword()
+                    if(email.isEmpty()){
+                        invalidMessage = "Email Field Cannot be Empty"
+                    }
+                    if(password.isEmpty()){
+                        invalidMessage = "Password Field Cannot be Empty"
+                    }
+                    else{
+                        invalidMessage = "Email or Password is incorrect"
+                    }
+                }
+            }
+        }
+    }
     Column(
         modifier = modifier.padding(10.dp)
     ) {
@@ -37,18 +67,15 @@ fun LoginScreen(
         )
         Button(
             onClick = {
-                loginViewModel.loginUser { isSuccess ->
-                    if (isSuccess) {
-                        navController.navigate(NavigationItems.ProfileScreen.route)
-                    } else {
-                        navController.navigate(NavigationItems.Home.route)
-                    }
-                }
+                loginUser()
             },
             modifier = Modifier.fillMaxWidth(),
         ) {
             Text("Log In")
         }
+        Text(
+            text = invalidMessage
+        )
     }
 }
 @Composable
@@ -81,6 +108,7 @@ fun PasswordField(
             onValueChange = onValueChange,
             label = { Text(labelText) },
             singleLine = true,
+            visualTransformation = PasswordVisualTransformation(),
             modifier = Modifier.fillMaxWidth()
         )
     }
