@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Text
@@ -120,6 +121,7 @@ fun ProfileScreen(
                 Text(
                     "Trash Collected: $trashCollected"
                 )
+
                 Button(
                     onClick = {
                         Firebase.auth.signOut()
@@ -127,12 +129,19 @@ fun ProfileScreen(
                     },
                     colors = ButtonDefaults.buttonColors(
                         containerColor = CustomOrange,
-                        contentColor = Color.White),
-                    modifier = Modifier.fillMaxWidth()
+                        contentColor = Color.White
+                    ),
+                    shape = RoundedCornerShape(30.dp),
+                    modifier = Modifier.height(70.dp)
+                        .fillMaxWidth()
+                        .padding(top = 10.dp),
+
+
                 ) {
                    Text(fontSize = 20.sp, text ="Log Out")
-
                 }
+                    Spacer(modifier=Modifier.height(15.dp))
+
                 Button(
                     onClick = {
                         if (user != null) {
@@ -143,7 +152,9 @@ fun ProfileScreen(
                     colors = ButtonDefaults.buttonColors(
                         containerColor = CustomRed,
                         contentColor = Color.White),
-                    modifier = Modifier.fillMaxWidth()
+                    shape = RoundedCornerShape(30.dp),
+                    modifier = Modifier.height(60.dp)
+                        .fillMaxWidth(),
                 ) {
                     Text(fontSize = 20.sp, text ="Delete Account")
                 }

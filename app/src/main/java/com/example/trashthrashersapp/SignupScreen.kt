@@ -1,10 +1,13 @@
 package com.example.trashthrashersapp
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
@@ -16,8 +19,11 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
@@ -99,11 +105,25 @@ fun SignupScreen(
 
     ) {
 
+
         Column(
             modifier = modifier.padding(10.dp)
         ) {
-
-
+            Box(
+                modifier = modifier
+                    .height(80.dp)
+                    .padding(top = 10.dp)
+                    .fillMaxWidth(),
+                        contentAlignment = Alignment.TopCenter
+            )
+            {
+                Image(
+                    painter = painterResource(id = R.drawable.appname),
+                    contentDescription = "Splash Screen logo",
+                    modifier = Modifier,
+                    contentScale = ContentScale.Crop
+                )
+            }
 
             UsernameField(
                 labelText = "Username",
@@ -129,6 +149,7 @@ fun SignupScreen(
                 onValueChange = { signupViewModel.onPasswordConfirmChange(it) },
                 modifier = Modifier.fillMaxWidth()
             )
+            Spacer(modifier=Modifier.height(15.dp))
             Button(
                 onClick = {
                     signUp()
@@ -136,7 +157,10 @@ fun SignupScreen(
                 colors = ButtonDefaults.buttonColors(
                     containerColor = CustomOrange,
                     contentColor = Color.White),
-                modifier = Modifier.fillMaxWidth()
+                shape = RoundedCornerShape(30.dp),
+                modifier = Modifier.height(60.dp)
+                    .fillMaxWidth(),
+
             ) {
                 Text(
                     text = "Sign Up",

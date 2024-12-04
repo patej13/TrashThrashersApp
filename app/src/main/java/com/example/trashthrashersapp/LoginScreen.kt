@@ -121,14 +121,14 @@ fun LoginScreen(
                         text = "We've missed you, welcome back! ",
                         fontSize = 20.sp,
                         color = Color.Black,
-                        modifier = Modifier.padding(top = 10.dp, bottom = 10.dp)
+                        modifier = Modifier.padding(top = 20.dp, bottom = 10.dp)
 
                     )
                     Text(
                         text = "Login Here ",
                         fontSize = 26.sp,
                         color = CustomRed,
-                        modifier = Modifier.padding(bottom = 24.dp)
+                        modifier = Modifier.padding(top = 20.dp, bottom = 24.dp)
                     )
                     EmailField(
                         labelText = "Email",
@@ -142,6 +142,7 @@ fun LoginScreen(
                         onValueChange = { loginViewModel.onPasswordChange(it) },
                         modifier = Modifier.fillMaxWidth()
                     )
+                    Spacer(modifier=Modifier.height(15.dp))
                     Button(
                         onClick = {
                             loginUser()
@@ -150,7 +151,10 @@ fun LoginScreen(
                             containerColor = CustomOrange,
                             contentColor = Color.White
                         ),
-                        modifier = Modifier.fillMaxWidth(),
+                        shape = RoundedCornerShape(30.dp),
+                        modifier = Modifier.height(60.dp)
+                            .fillMaxWidth(),
+
                     ) {
                         Text(
                             text = "Log In",
