@@ -1,6 +1,7 @@
 package com.example.trashthrashersapp
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.AccountCircle
+import androidx.compose.material.icons.outlined.AddCircle
 import androidx.compose.material.icons.outlined.Info
 import androidx.compose.material.icons.outlined.Phone
 import androidx.compose.ui.graphics.vector.ImageVector
@@ -29,7 +30,7 @@ sealed class NavigationItems(
     object CameraScreen : NavigationItems(
         route = "camera",
         title = "Camera",
-        icon = Icons.Outlined.Phone
+        icon = Icons.Outlined.AddCircle
     )
     object MapScreen : NavigationItems(
         route = "map",
