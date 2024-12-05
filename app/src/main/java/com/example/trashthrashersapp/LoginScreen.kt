@@ -176,7 +176,7 @@ fun LoginScreen(
 
 
 
-                    Text(
+/*                    Text(
                         text = buildAnnotatedString {
                             append("Don't have an account? ")
                             withStyle(style = androidx.compose.ui.text.SpanStyle(color = Color.Blue)) {
@@ -184,7 +184,7 @@ fun LoginScreen(
                             }
                         },
                         fontSize = 16.sp,
-                    )
+                    )*/
                     /*SocialMediaRow()*/
                 }
             }

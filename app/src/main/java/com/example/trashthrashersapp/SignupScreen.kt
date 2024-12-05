@@ -184,7 +184,7 @@ fun SignupScreen(
             Text(
                 text = invalidMessage
             )
-            Text(
+/*            Text(
                 text = buildAnnotatedString {
                     append("Already have an account? ")
                     withStyle(style = androidx.compose.ui.text.SpanStyle(color = Color.Blue)) {
@@ -193,7 +193,7 @@ fun SignupScreen(
                 },
 
                 fontSize = 20.sp
-            )
+            )*/
 
             /*SocialMediaRow()*/
         }
