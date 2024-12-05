@@ -83,7 +83,7 @@ fun AboutScreen(
                     text = "The purpose of this app is to encourage trash collection on the FSC campus. This goal will be achieved by marking locations that contain litter or other trash on a map. Users will also take a picture of the trash, this picture will be uploaded. The amount of locations marked or collected will be visible in the profile tab, as well as the leaderboard tab."
                 )
                 Spacer(modifier = Modifier.height(60.dp))
-                Button(
+                /*Button(
                     onClick = {
                         var trashMarkedInt = trashMarked.toInt()
                         trashMarkedInt++
@@ -111,10 +111,10 @@ fun AboutScreen(
                 ) {
                     Text(text= "Add Trash Marked",
                             fontSize = 20.sp)
-                }
+                }*/
                 Spacer(modifier=Modifier.height(15.dp))
 
-                Button(
+/*                Button(
                     onClick = {
                         var trashCollectedInt = trashCollected.toInt()
                         trashCollectedInt++
@@ -141,7 +141,7 @@ fun AboutScreen(
                         .fillMaxWidth(),                ) {
                     Text(text ="Add Trash Collected",
                         fontSize = 20.sp)
-                }
+                }*/
             }
         }
     }
