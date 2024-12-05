@@ -70,6 +70,11 @@ fun ProfileScreen(
                 if (user != null) {
                     user.delete()
                 }
+                val firestoreDB = FirebaseFirestore.getInstance()
+                val userInformation = user?.let { firestoreDB.collection("Info").document(it.uid) }
+                if (userInformation != null) {
+                    userInformation.delete()
+                }
                 navController.navigate(NavigationItems.Home.route)
             },
             modifier = Modifier.fillMaxWidth()
