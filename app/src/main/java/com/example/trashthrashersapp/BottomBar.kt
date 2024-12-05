@@ -26,7 +26,8 @@ fun BottomBar(
     val screens = listOf(
         NavigationItems.ProfileScreen,
         NavigationItems.MapScreen,
-        NavigationItems.AboutScreen
+        NavigationItems.AboutScreen,
+        NavigationItems.CameraScreen
 
     )
     NavigationBar(

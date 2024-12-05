@@ -52,6 +52,15 @@ android {
 }
 
 dependencies {
+    //camera dependecies
+    implementation("androidx.camera:camera-camera2:1.1.0")
+    implementation("androidx.camera:camera-lifecycle:1.1.0")
+    implementation("androidx.camera:camera-view:1.1.0")
+    implementation("androidx.camera:camera-extensions:1.1.0")
+    implementation("androidx.compose.ui:ui:1.5.0")
+    implementation("androidx.compose.material:material:1.5.0")
+    implementation("androidx.compose.ui:ui-tooling-preview:1.5.0")
+    //
     implementation("com.google.android.gms:play-services-maps:18.0.2")
     implementation("com.google.maps.android:maps-compose:2.11.4")
     implementation(platform("com.google.firebase:firebase-bom:33.6.0"))
@@ -69,6 +78,7 @@ dependencies {
     implementation(libs.androidx.navigation.common.ktx)
     implementation(libs.androidx.navigation.compose)
     implementation(libs.firebase.firestore.ktx)
+    implementation(libs.firebase.storage.ktx)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
