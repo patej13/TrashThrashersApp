@@ -1,9 +1,17 @@
 package com.example.trashthrashersapp
 
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
+import androidx.compose.foundation.border
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
@@ -11,12 +19,20 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
+import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
+import com.example.trashthrashersapp.ui.theme.CustomOrange
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.auth.FirebaseAuth
 
@@ -78,56 +94,109 @@ fun SignupScreen(
             }
         }
     }
-    Column(
-        modifier = modifier.padding(10.dp)
+    TwoColorSignUpBackground()
+
+    Box(
+        modifier = modifier
+            .padding(top = 100.dp, start = 16.dp, end = 16.dp)
+            .background(Color.White, shape = RoundedCornerShape(10.dp))
+            .border(2.dp, Color.Gray, RoundedCornerShape(10.dp))
+            .padding(5.dp)
+
     ) {
-        UsernameField(
-            labelText = "Username",
-            textInput = userName,
-            onValueChange = {signupViewModel.onUsernameChange(it)},
-            modifier = Modifier.fillMaxWidth()
-        )
-        SignUpEmailField(
-            labelText = "Email",
-            textInput = email,
-            onValueChange = {signupViewModel.onEmailChange(it)},
-            modifier = Modifier.fillMaxWidth()
-        )
-        SignUpPasswordField(
-            labelText = "Password",
-            textInput = password,
-            onValueChange = {signupViewModel.onPasswordChange(it)},
-            modifier = Modifier.fillMaxWidth()
-        )
-        SignUpPasswordConfirmField(
-            labelText = "Password Confirmation",
-            textInput = passwordConfirm,
-            onValueChange = {signupViewModel.onPasswordConfirmChange(it)},
-            modifier = Modifier.fillMaxWidth()
-        )
-        Button(
-            onClick = {
-                signUp()
-            },
-            modifier = Modifier.fillMaxWidth()
+
+
+        Column(
+            modifier = modifier.padding(10.dp)
         ) {
-            Text("Sign Up")
+            Box(
+                modifier = modifier
+                    .height(80.dp)
+                    .padding(top = 10.dp)
+                    .fillMaxWidth(),
+                        contentAlignment = Alignment.TopCenter
+            )
+            {
+                Image(
+                    painter = painterResource(id = R.drawable.appname),
+                    contentDescription = "Splash Screen logo",
+                    modifier = Modifier,
+                    contentScale = ContentScale.Crop
+                )
+            }
+
+            UsernameField(
+                labelText = "Username",
+                textInput = userName,
+                onValueChange = { signupViewModel.onUsernameChange(it) },
+                modifier = Modifier.fillMaxWidth()
+            )
+            SignUpEmailField(
+                labelText = "Email",
+                textInput = email,
+                onValueChange = { signupViewModel.onEmailChange(it) },
+                modifier = Modifier.fillMaxWidth()
+            )
+            SignUpPasswordField(
+                labelText = "Password",
+                textInput = password,
+                onValueChange = { signupViewModel.onPasswordChange(it) },
+                modifier = Modifier.fillMaxWidth()
+            )
+            SignUpPasswordConfirmField(
+                labelText = "Password Confirmation",
+                textInput = passwordConfirm,
+                onValueChange = { signupViewModel.onPasswordConfirmChange(it) },
+                modifier = Modifier.fillMaxWidth()
+            )
+            Spacer(modifier=Modifier.height(15.dp))
+            Button(
+                onClick = {
+                    signUp()
+                },
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = CustomOrange,
+                    contentColor = Color.White),
+                shape = RoundedCornerShape(30.dp),
+                modifier = Modifier.height(60.dp)
+                    .fillMaxWidth(),
+
+            ) {
+                Text(
+                    text = "Sign Up",
+                    fontSize = 20.sp
+
+                )
+            }
+            Spacer(modifier = Modifier.height(20.dp))
+            Text(
+                text = "Emails and passwords must follow the following format:"
+            )
+            Text(
+                text = "4 letters + @ + valid domain (ex .com)"
+            )
+            Text(
+                text = "Password must be at least 5 characters"
+            )
+            Text(
+                text = errorMessage
+            )
+            Text(
+                text = invalidMessage
+            )
+/*            Text(
+                text = buildAnnotatedString {
+                    append("Already have an account? ")
+                    withStyle(style = androidx.compose.ui.text.SpanStyle(color = Color.Blue)) {
+                        append("Login!")
+                    }
+                },
+
+                fontSize = 20.sp
+            )*/
+
+            /*SocialMediaRow()*/
         }
-        Text(
-            text = "Emails and passwords must follow the following format:"
-        )
-        Text(
-            text = "4 letters + @ + valid domain (ex .com)"
-        )
-        Text(
-            text = "Password must be at least 5 characters"
-        )
-        Text(
-            text = errorMessage
-        )
-        Text(
-            text = invalidMessage
-        )
     }
 }
 @Composable

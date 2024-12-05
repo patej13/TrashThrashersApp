@@ -22,9 +22,13 @@ class SignupViewModel: ViewModel()  {
     }
     fun onUsernameChange(newUsername: String) {
         userName = newUsername
+
     }
     fun resetEmailPassword(){
         email = ""
         password = ""
+        passwordConfirm = ""
+        userName = ""
     }
 }
+
