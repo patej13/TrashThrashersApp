@@ -30,6 +30,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
@@ -77,6 +78,7 @@ fun ProfileScreen(
         Box(
             modifier = Modifier.fillMaxWidth(),
             contentAlignment = Alignment.TopCenter
+
         ) {
             Image(
                 painter = painterResource(id = R.drawable.placeholder_profile),
@@ -94,6 +96,8 @@ fun ProfileScreen(
                 modifier = Modifier
                     .padding(top = 40.dp)
                     .fillMaxWidth()
+                    .shadow(
+                        elevation = 6.dp)
                     .background(
                         color = NeutralBackground,
                         shape = RoundedCornerShape(16.dp)
