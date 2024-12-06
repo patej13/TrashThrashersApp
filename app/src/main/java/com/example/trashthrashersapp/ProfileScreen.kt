@@ -121,9 +121,9 @@ fun ProfileScreen(
                 Text(
                     "Trash Marked: $trashMarked"
                 )
-                Text(
-                    "Trash Collected: $trashCollected"
-                )
+              //  Text(
+              //      "Trash Collected: $trashCollected"
+             //   )
 
                 Button(
                     onClick = {
