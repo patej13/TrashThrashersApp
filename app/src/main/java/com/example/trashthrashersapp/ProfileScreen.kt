@@ -40,8 +40,6 @@ import com.example.trashthrashersapp.ui.theme.CustomOrange
 import com.example.trashthrashersapp.ui.theme.CustomRed
 import com.example.trashthrashersapp.ui.theme.NeutralBackground
 
-
-
 @Composable
 fun ProfileScreen(
     navController: NavHostController,
@@ -121,9 +119,9 @@ fun ProfileScreen(
                 Text(
                     "Trash Marked: $trashMarked"
                 )
-                Text(
-                    "Trash Collected: $trashCollected"
-                )
+//                Text(
+//                    "Trash Collected: $trashCollected"
+//                )
 
                 Button(
                     onClick = {

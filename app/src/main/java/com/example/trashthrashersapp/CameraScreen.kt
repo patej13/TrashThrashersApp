@@ -78,7 +78,6 @@ fun CameraScreen() {
             val uploadTask = fileRef.putBytes(byteArray)
 
             uploadTask.addOnSuccessListener {
-                // Get the download URL after successful upload
                 fileRef.downloadUrl.addOnSuccessListener { downloadUri ->
                     uploadedImageUrl = downloadUri.toString() // Save URL to state
                     Toast.makeText(context, "Image uploaded successfully!", Toast.LENGTH_SHORT).show()

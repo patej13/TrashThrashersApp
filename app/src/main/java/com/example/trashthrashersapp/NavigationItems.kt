@@ -6,11 +6,6 @@ import androidx.compose.material.icons.outlined.Info
 import androidx.compose.material.icons.outlined.Phone
 import androidx.compose.ui.graphics.vector.ImageVector
 
-/**
- * Navigation Items, add an object to the function below
- * Model after the first two for anything that might require a new screen that is not related to the navigation bar contents
- * Model after the profile screen for navigation bar items
- */
 sealed class NavigationItems(
     val route: String,
     val title: String? = null,

@@ -2,7 +2,6 @@ package com.example.trashthrashersapp
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Arrangement.Top
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -25,14 +24,6 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.example.trashthrashersapp.ui.theme.CustomOrange
 import com.example.trashthrashersapp.ui.theme.CustomRed
-import com.example.trashthrashersapp.ui.theme.CustomTeal
-
-/**
- * Temporary Home Screen
- * This is supposed to be the screen with 2 buttons, sign in or sign up
- * It has a path to the main contents of the app temporarily, so the the sign in can be developed
- * at the same time as the rest of the app. It also allows us to skip the sign in process during testing
- */
 
 @Composable
 fun HomeScreen(
@@ -93,24 +84,22 @@ WhiteBackground {
         }
         Spacer(modifier = Modifier.height(100.dp))
 
-        Button(
-            onClick = {
-                navController.navigate(NavigationItems.ProfileScreen.route)
-            },
-            colors = ButtonDefaults.buttonColors(
-                containerColor = CustomTeal,
-                contentColor = Color.White
-            ),
-            shape = RoundedCornerShape(30.dp),
-            modifier = Modifier
-                .size(width = 300.dp, height = 70.dp)
-
-        ) {
-            Text(fontSize = 18.sp, text = "Go to App")
-        }
-
+//        Button(
+//            onClick = {
+//                navController.navigate(NavigationItems.ProfileScreen.route)
+//            },
+//            colors = ButtonDefaults.buttonColors(
+//                containerColor = CustomTeal,
+//                contentColor = Color.White
+//            ),
+//            shape = RoundedCornerShape(30.dp),
+//            modifier = Modifier
+//                .size(width = 300.dp, height = 70.dp)
+//
+//        ) {
+//            Text(fontSize = 18.sp, text = "Go to App")
+//        }
         Spacer(modifier = Modifier.height(15.dp))
-
         Button(
             onClick = {
                 navController.navigate(NavigationItems.Login.route)
@@ -125,9 +114,7 @@ WhiteBackground {
         ) {
             Text(fontSize = 18.sp, text = "Log in")
         }
-
         Spacer(modifier = Modifier.height(15.dp))
-
         Button(
             onClick = {
                 navController.navigate(NavigationItems.Signup.route)
@@ -143,6 +130,5 @@ WhiteBackground {
             Text(fontSize = 18.sp, text = "Sign Up")
         }
     }
-}
-
+    }
 }

@@ -13,10 +13,6 @@ import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 
-/**
- * DO NOT CHANGE ANYTHING IN THIS CLASS
- * Note: add comments later
- */
 @Composable
 fun BottomBar(
     navController: NavHostController,
