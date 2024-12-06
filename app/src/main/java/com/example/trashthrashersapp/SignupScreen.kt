@@ -173,7 +173,7 @@ fun SignupScreen(
                 text = "4 letters + @ + valid domain (ex .com)"
             )
             Text(
-                text = "Password must be at least 5 characters"
+                text = "Password must be at least 6 characters"
             )
             Text(
                 text = errorMessage
